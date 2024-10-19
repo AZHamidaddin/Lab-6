@@ -11,7 +11,6 @@ const resetBtn = document.getElementById('resetBtn');
 const commentInput = document.getElementById('commentInput');
 const commentList = document.getElementById('commentList');
 
-// Load saved state from cookies
 window.onload = function() {
     likeCount = parseInt(getCookie("likeCount")) || 100;
     dislikeCount = parseInt(getCookie("dislikeCount")) || 20;
@@ -20,21 +19,18 @@ window.onload = function() {
     updateUI();
 }
 
-// Like button handler
 likeBtn.addEventListener('click', function() {
     likeCount++;
     setCookie("likeCount", likeCount, 30);
     updateUI();
 });
 
-// Dislike button handler
 dislikeBtn.addEventListener('click', function() {
     dislikeCount++;
     setCookie("dislikeCount", dislikeCount, 30);
     updateUI();
 });
 
-// Submit comment handler
 submitBtn.addEventListener('click', function() {
     const commentText = commentInput.value.trim();
     if (commentText) {
@@ -45,7 +41,6 @@ submitBtn.addEventListener('click', function() {
     commentInput.value = '';
 });
 
-// Reset handler
 resetBtn.addEventListener('click', function() {
     likeCount = 100;
     dislikeCount = 20;
@@ -56,12 +51,10 @@ resetBtn.addEventListener('click', function() {
     updateUI();
 });
 
-// Update UI function
 function updateUI() {
     likeCountSpan.innerText = likeCount;
     dislikeCountSpan.innerText = dislikeCount;
     
-    // Display comments
     commentList.innerHTML = '';
     comments.forEach(comment => {
         const commentDiv = document.createElement('div');
@@ -71,7 +64,6 @@ function updateUI() {
     });
 }
 
-// Cookie functions
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
